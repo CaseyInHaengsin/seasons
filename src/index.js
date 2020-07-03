@@ -9,13 +9,14 @@ class App extends React.Component {
         super(props);
 
         this.state = {
-            lat: null
+            lat: null,
+            errorMessage: ""
         };
         window.navigator.geolocation.getCurrentPosition(
             position => {
                 this.setState({lat: position.coords.latitude})
             },
-            err => console.log(err)
+            err => this.setState({errorMessage: err.message})
         )
     }
     //We need to have a render method
@@ -23,7 +24,14 @@ class App extends React.Component {
     render(){
         
         
-        return <div>Latitude: {this.state.lat} </div>
+        return (
+            <div>Latitude: {this.state.lat} 
+            <br/>
+            Error: {this.state.errorMessage}
+            
+            
+            </div>
+            );
     }
 }
 
